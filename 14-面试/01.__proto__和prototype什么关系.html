@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 所有对象都有__proto__属性，函数这个特殊对象除了有__proto__属性，
+    // 还有特殊的原型属性prototype.
+    // prototype 对象默认有两个属性，constructor属性和__proto__属性。
+    // prototype属性可以给函数和对象添加共享(继承)的方法和属性
+    // 而__proto__是查找函数或对象的原型链方式
+    // constructor,这个属性包含了一个指针，指回构造函数。
+
+    function Foo() {
+        console.log('foo');
+    }
+
+    let fn = new Foo();
+    console.log([Foo]);
+    console.log(Foo.prototype === fn.__proto__);
+
+</script>
+</html>

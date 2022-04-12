@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let obj = {
+        myname: '张三',
+    }
+    function fn(...args) {
+        console.log(this,args);
+    }
+    // fn(1,2);
+    // fn.call(obj,1,2);
+    // fn.apply(obj,[1,2]);
+    // fn.bind(obj,1)(2);
+
+    // Function.prototype.myBind = function(ctx) {
+    //     console.log(this);
+    //     if(typeof this !== 'function') {
+    //         throw Error('error');
+    //     }
+    //     let args = [...arguments].slice(1);
+    //     let fn = this;
+    //     return function Fn(){
+    //         return fn.apply(this instanceof Fn ? new fn :ctx,args.concat(...arguments))
+    //     }
+    // }
+
+    // fn.myBind(obj,1)(2,3);
+    // let foo = fn.myBind(obj);
+    //  // 如果是new调用，说明当前this是指向bind产出的构造函数的
+    // let res = new foo(1); 
+    // fn.bind(obj,1,2)();
+    // new (fn.bind(obj,1,2));
+
+Function.prototype.myCall = function(ctx,...args) {
+    const obj = ctx == undefined ? window : Object(ctx);
+    const key = Symbol();
+    obj[key] = this;
+    const result = obj[key](...args);
+    delete obj[key];
+    return result;
+}
+
+Function.prototype.myApply = function(ctx,arr=[]) {
+    return this.myCall(ctx,...arr);
+}
+
+Function.prototype.myBind = function(ctx,...args) {
+    let _self = this;
+    const newFn = function Fn(...rest) {
+        return _self.myCall(this instanceof Fn ? new _self: ctx,...args,...rest);
+    }
+    if(_self.prototype) {
+        newFn.prototype = Object.create(_self.prototype);
+    }
+    return newFn;
+}
+// let f1 = fn.bind('1');
+// let f2 = new f1(2);
+let newBind = fn.myBind();
+let newFn = new newBind(22);
+</script>
+</html>

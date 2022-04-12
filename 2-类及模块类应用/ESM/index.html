@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script type="module"> // 原生用模块化加type="module"
+    // ESM ES6 module; 模块化; 1.分离：分割成小颗粒；2.可组合性；3.命名空间：防止变量污染
+    // ADM CMD  -->> ESM 前端 / commonjs nodejs
+    // 导入 -->> 导出；
+    import obj, {a as c, b} from './a.js';
+    console.log(c);
+
+    // 按需导入；
+    document.onclick = function() {
+        import('./b.js').then(res => {
+            console.log(res);
+        })
+    }
+</script>
+</html>

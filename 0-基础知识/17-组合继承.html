@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function Dad(name,age) {
+       this.name = name;
+       this.age = age;
+       this.money = "100000" 
+    }
+
+    Dad.prototype.fn = function() {
+        console.log("父fn");
+    }
+    function Son(name,age) {
+        // Dad.call(this,name,age);
+        // Dad.apply(this,[name,age]);
+        Dad.bind(this)(name,age);
+    }
+
+    // Son.prototype = deepCopy(Dad.prototype);
+    // 可以通过中间函数new实例化重新开辟内存地址
+    let Link = function() {};
+    Link.prototype = Dad.prototype;
+    Son.prototype = new Link();
+    Son.prototype.constructor = Son;
+    Son.prototype.fn = function() {
+        console.log("重写的fn");
+    }
+    let zhangsan = new Son("张三",20);
+    // console.log(zhangsan.money);
+    // console.log(zhangsan.sex);
+    zhangsan.fn()
+    let zhangyi = new Dad("张一",20);
+    zhangyi.fn();
+</script>
+</html>

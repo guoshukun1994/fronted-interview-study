@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // extends ----> 扩展 Decorator 扩展一些额外信息（把功能增强）;
+
+    function Hurt() {
+        console.log('造成100点伤害');
+    }
+    class Yase{
+        constructor() {
+            this.name = '亚瑟'; 
+        }
+        release() {
+            console.log('释放技能');
+        }
+    }
+
+    // 装饰对于原本类没有更改
+    // Function.prototype.Decorator = function(fn) {
+    //     this();
+    //     fn();
+    // }
+    // let yase = new Yase();
+    // // yase.release();
+    // yase.release.Decorator(Hurt);
+
+    // 装饰者链
+    Function.prototype.Decorator = function(fn) {
+        let _this = this;
+        return function() {
+            _this();
+            fn();
+        }
+    }
+    let yase = new Yase();
+    yase.release.Decorator(Hurt).Decorator(Hurt)();
+</script>
+</html>

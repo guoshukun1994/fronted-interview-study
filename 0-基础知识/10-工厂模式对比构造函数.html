@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 工厂模式  // 没有原型、没有公共空间消耗性能、没法判断创建的对象是从哪个工厂函数创建出来的
+    // function Person(name,age,hobby) {
+    //     let obj = {};       // 添加原料
+    //     obj.name = name;
+    //     obj.age = age;
+    //     obj.hobby = function() {
+    //         console.log(hobby);
+    //     }// 加工原料
+    //     return obj; // 出厂
+    // }
+
+    // let zhangsan = Person("张三",20,"喜欢篮球");
+
+    // 构造函数 // 有原型的公共空间存放方法，可以通过constructor判断该实例对象是哪个构造函数创建出来的，即对象的类型
+    function Person() {
+        this.name = name;
+        this.age = 20;
+    }
+
+    Person.prototype.hobby = function() {
+        console.log("喜欢篮球");
+    }
+    let zhangsan1 = new Person("张三");
+    console.log(zhangsan.constructor === Person);  //  true
+    console.log(Person.prototype.constructor === Person); // true
+    let str = "abc";  // 系统内置构造函数构造的
+    console.log(str.constructor === String); // true
+
+</script>
+</html>

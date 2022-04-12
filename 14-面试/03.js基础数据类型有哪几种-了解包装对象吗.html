@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    let s1 = 'some text';
+    let s2 = s1.substring(2);
+    // 第二行访问s1时，是以读模式访问的，也就是要从内存中读取变量保存的值。
+    // 在以读模式访问字符串的任何时候，后台会执行以下三步：
+    // 1) 创建一个String类型的实例 2）调用实例上的特定方法 3）销毁实例
+    // 引用类型区别于包装类型的在于对象的生命周期，自动创建的原始值包装对象只存在于访问它的那行代码执行期间
+
+    
+    
+    function mySplit(str1,method,arg) {
+        let obj = new String(str1);
+        return obj[method](arg);
+    }
+    let str = '1 2 3';
+    let arr = mySplit(str,'split',' ');
+    console.log(arr);
+    // null typeof null 为什么是object?
+    // js 早期只存在32位系统中 为了节省性能 将00开头的全部定义为对象，而null全是0,会被系统误认为，所有typeof === 'object'
+</script>
+</html>

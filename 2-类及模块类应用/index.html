@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 一、 面向对象: 编程范式
+    // 对象(属性、方法) -->> 类 -->> 基类 -->> 研究逻辑关系
+    // ES5用构造函数来模拟类 类似于类的概念
+    // function Person() {
+    //     this.name = "张三";
+    // }
+    // Person.prototype.fn = function() {
+    //     console.log("fn");
+    // }
+
+    // ES6 语义化
+    // class Person{
+    //     constructor() {
+    //         this.name = "张三";
+    //     }
+    //     fn() {
+    //         console.log("fn");
+    //     }
+    // }
+    // console.log(typeof Person);
+    // let zhangsan = new Person();
+    // console.log(zhangsan);
+    // zhangsan.fn();
+
+    // 二、 公有私有 ES5
+    // function Person() {
+    //     var _age = 25;
+    //     this.name = "张三";
+    // }
+    // let zhangsan = new Person()
+    // console.log(zhangsan.name);
+
+    // ES6 
+    // class Person{
+    //     height = "178cm"; // 隐式public
+    //     #age = 25; // 私有 :只能在类的内部调用
+    //     constructor() {
+    //         this.name = "张三";
+    //     }
+    //     fn() {
+    //         console.log("fn");
+    //     }
+    //     getAge() {
+    //         return this.#age;
+    //     }
+    // }
+    // let zhangsan = new Person();
+    // console.log(zhangsan);
+    // console.log(zhangsan.#age);   // 访问不了
+    // console.log(zhangsan.height);
+    // console.log(zhangsan.getAge()); // 通过定义方法访问私有属性
+
+    // 三、 静态成员：和类有关系 和 实例化对象没关系
+    // ES5
+    // function Person() {
+    //     this.name = "张三";
+    // }
+    // Person.num = 10; // 静态属性
+
+    // ES6
+    // class Person{
+    //     static num = 10;
+    //     constructor() {
+    //         this.name = "张三";
+    //     }
+    //     static fn() {
+    //         console.log("fn");
+    //     }
+    // }
+    // console.log(Person.num);
+    // Person.fn();
+    // let zhangsan = new Person();
+
+    // Promise.resolve reject race all ... // 静态方法
+
+    // 单例模式：一个类只会有一个实例;  window、document、store
+    // 记录实例的状态;
+    // 实现了单例，有全局变量污染
+    // let instance;
+    // class Person{
+    //     constructor() {
+    //         if(!instance) {
+    //             instance = this;
+    //             this.name = name;
+    //         }else {
+    //             return instance;
+    //         }
+    //     }
+
+    // }
+    // let zhangsan = new Person("张三");
+    // let lisi = new Person("李四");
+    // console.log(zhangsan === lisi);  // 两个实例完全相同
+
+    // 静态成员改造
+    // class Person{
+    //     static instance;
+    //     constructor(name) {
+    //         if(!Person.instance) {
+    //             Person.instance = this;
+    //             this.name = name;
+    //         }else {
+    //             return Person.instance;
+    //         }
+    //     }
+    // }
+    // let zhangsan = new Person("张三");
+    // let lisi = new Person("李四");
+    // console.log(zhangsan === lisi);  // 两个实例完全相同
+
+    //  四、访问器属性: 包含getter和setter的函数，读取访问器的时候会调取getter 设置访问器的时候 调取setter;
+    // class Person{
+    //     #age = 25;
+    //     constructor(name) {
+    //         this.name = name;
+    //         // this.height = "178cm";  // 这样声明参数无法被控制  用下面的get\set就可控制起来
+    //     }
+    //     get height() {       
+    //         return "178cm";
+    //     }
+    //     set height(newVal) {
+    //         this.height = newVal;
+    //     }
+    //     // 获取age
+    //     get age() {
+    //         console.log("读取的时候调用get");
+    //         return this.#age;
+    //     }
+    //     // 设置age
+    //     set age(newVal) {
+    //         console.log("设置的时候调用set");
+    //         this.#age = newVal;
+    //     }
+    // }
+
+    // let zhangsan = new Person("张三");
+    // // zhangsan.age 读取 age属性
+    // console.log(zhangsan.age);
+    // zhangsan.age = 30;
+    // // 使用场景：数据响应式这节课里说
+
+    // 继承 ES5
+    // function Person(name) {
+    //     this.name = name;
+    // }
+    // function Son(name) {
+    //     Person.call(this,name); //  apply bind
+    // }
+    // let zhangsan = new Son("张三");
+    // console.log(zhangsan);
+
+    // ES6 继承
+    // class Person{
+    //     static height = "178cm";
+    //     constructor(name) {
+    //         this.name = name;
+    //     }
+    //     fn() {
+    //         console.log("父类的fn");
+    //     }
+    // }
+    // class Son extends Person{
+    //     constructor(name) {  // 子类可以不写constructor，默认包含
+    //         super(name);
+    //     }
+    //     fn() {
+    //         // super不可以直接打印输出
+    //         super.fn();
+    //         console.log("子类的fn");
+    //     }
+    // }
+    // console.log(Son.height); 
+    // let zhangsan = new Son("张三");
+    // console.log(zhangsan);
+    // zhangsan.fn();
+    
+
+    // 六、抽象基类；
+    // 对象--公共特征-->> 类 ----公共特征抽象 ——>> 基类
+    // class AbstractPerson{
+    //     constructor() {
+    //         console.log("抽象基类",new.target);
+    //         if(new.target === AbstractPerson) {
+    //             throw new Error("AbstractPerson不能被实例化")
+    //         }
+    //     }
+    // }
+    // class Person extends AbstractPerson{
+
+    // }
+
+    // let zhangsan = new AbstractPerson();
+    // let lisi = new Person();
+
+    // 面试题一：
+    // class Dog {
+    //     wow() {
+    //         console.log("wow");
+    //     }
+    //     yelp() {
+    //         this.wow();
+    //     }
+    // }
+    // class MadDog extends Dog{
+    //     yelp() {
+    //         setInterval(()=> {
+    //             this.wow();
+    //         },500)
+    //     }
+    // }
+    // let xiaoxian = new Dog();
+    // xiaoxian.yelp();
+    // let xiaomang = new MadDog();
+    // xiaomang.yelp();
+
+    // 面试题二：如何实现链式调用
+    // promise.then().then()...
+    // class MyPromise{
+    //     then() {
+    //        console.log("then"); //
+    //        // 返还this
+    //        // return this;
+    //        // 返还实例化对象
+    //        return new MyPromise();
+    //     }
+    // }
+
+    // let p = new MyPromise();
+    // p.then().then().then();
+
+    // 面试题三：__proto__和prototype之间有什么关系？
+    class Person{
+        constructor() {
+            
+        }
+    }
+    // __proto__所有对象都有
+    // Person 既是函数 又是对象; 作为函数有prototype，作为对象有__proto__
+    // 实例化之前事 prototype, 实例化之后是__proto__
+    // console.dir(Person);
+    // __proto__ 不建议使用 ES6
+    // let obj = {};
+    // obj.__proto__.name = "张三"; // 不推荐
+    // Object.getPrototypeOf Object.setPrototypeOf 推荐
+    // Array.prototype.fn = function() {
+    //     console.log("fn");
+    // }
+    // let arr = [1,2,3];
+    // arr.fn();
+    // mixin 多继承;
+    
+</script>
+</html>

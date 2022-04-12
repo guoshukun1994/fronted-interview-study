@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 构造函数默认会创建原型，用来存放公共方法
+    // 一般在构造函数放属性，原型放方法
+    // 人类
+    function Person() {
+        this.name = name;
+        this.age = 20;
+        // this.hobby = function() {
+        //     console.log("喜欢篮球");
+        // }
+    }
+
+    // 公共空间原型  
+    Person.prototype.hobby = function() {
+        console.log("喜欢篮球");
+    }
+
+    Person.prototype.fn = function() {
+        console.log("fn");
+    }
+
+    // 给原型加方法是不要直接给prototype赋值，不然会覆盖原有的constuctor
+    // Person.prototype = {
+    //     hobby:function() {
+    //         console.log("hobby");
+    //     }
+    // }
+    // 非得这么写，可以手动创建constructor
+    Person.prototype = {
+        constructor: Person,
+        hobby:function() {
+            console.log("hobby");
+        }
+    }
+    // 原型的固有属性
+    console.log(Person.prototype.constructor === Person);
+
+    // 实例了两个具体的人类对象
+    // 实例化对象也分为两个部分，一部分是构造函数部分的属性和方法，一部分是自己的原型对应构造函数的原型对象zhangsan.__proto__ === Person.prototype // true
+    let zhangsan = new Person("张三");
+    console.log(zhangsan.constructor === Person);
+    let lisi = new Person("李四");
+
+    console.log(zhangsan.hobby === lisi.hobby);  // true
+
+
+    // 利用constructor 判断类型;
+    // let str = new String("abc");
+
+     let str = "abd";
+     console.log(str.constructor === String);
+
+     // 构造函数有两部分：
+     // 实例化之前：自身的属性和方法+原型prototype(有固有属性constructor指回构造函数)
+     // new 实例化之后：构造函数的的属性和方法会指向实例化对象，prototype指向对象的__proto__,两者是一个东西只是表现形式不一样
+</script>
+</html>

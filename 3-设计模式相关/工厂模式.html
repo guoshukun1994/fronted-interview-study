@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 工厂模式： 封装具体实例创建逻辑和过程，外部只需要根据不同条件返回不同的实例
+    // 对象创建 和 实现分离
+
+    // function Factory() {
+    //     let obj = {};
+    //     obj.name = 'zhangsan';
+    //     obj.age = 20;
+    //     return obj;
+    // }
+    class Luban{
+        constructor(name) {
+            this.name = name;
+        }
+    }
+    class Yase{
+        constructor(name) {
+            this.name = name;
+        }
+    }
+
+    // 工厂模式
+    function Factory(type) {
+        switch(type) {
+            case 'luban':
+                return new Luban();
+                break; 
+            case 'yase':
+                return new Yase();
+                break; 
+            default:
+                console.log('没有匹配');
+                break;
+        }
+    }
+
+    let yase = Factory('yase');
+    let luban = Factory('luban');
+    console.log({yase,luban});
+    // 解耦 抽象创建过程 缺点： 增加代码复杂程度
+
+
+    // $().click on get...
+
+    class Ja{
+        click() {
+            console.log('click');
+        }
+        on() {
+            console.log('on');
+        }
+    }
+    function $(){
+        return new Ja();
+    }
+    $().click();
+    $().on();
+</script>
+</html>

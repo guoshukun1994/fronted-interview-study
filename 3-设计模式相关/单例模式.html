@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 设计模式
+    // 单例模式
+    // let obj = {
+    //     name: '张三',
+    //     age: 20
+    // }
+
+    class Person{
+        static instance;
+        constructor(name){
+            if(Person.instance){
+                return Person.instance;
+            }
+            Person.instance = this;
+            this.name = name;
+        }
+    }
+
+    let zhangsan = new Person('zhangsan');
+    let lisi = new Person('lisi');
+    console.log(zhangsan,lisi);
+
+    class Animal{
+        static instance;
+        constructor(name) {
+            if(Animal.instance){
+                return Animal.instance;
+            }
+            Animal.instance = this;
+            this.name = name;
+        }
+    }
+
+    let dog = new Animal();
+    // 上面这种单例模式不能通用，每个类的实例化都得定义静态变量去实现单例
+
+    // 利用闭包保存实例
+    // 高阶函数： 有函数输入或者是输出的函数  
+    function getSingle(fn) {
+        let instance;
+        return function(...args) {
+            if(!instance) {
+                instance = new fn(...args);
+            }
+            return instance;
+        }
+    }
+    // 这样每个类在实例化的时候通过调用getSingle即可，不需去实现额外的单例代码
+    let zhangsan2 = getSingle(Person);
+
+    // 单例应用： window\document\store\$()  ....
+</script>
+</html>

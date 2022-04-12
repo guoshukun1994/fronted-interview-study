@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        .box{
+            background: red;
+            width: 100px;
+        }
+        .box2{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>原本jq</h1>
+    <!-- <button>点击1</button> -->
+    <button>点击2</button> 
+    <div class="box">div1</div>
+    <!-- <div class="box2">div2</div> -->
+</body>
+<script>
+// 原生js
+// document.querySelector("button").onclick = function(){
+//     console.log(123);
+// }
+
+// jq-->js框架
+// 一、原生实现如下功能？？
+// $("button").click(()=>{
+//     console.log(123);
+// })
+// 二、选择器的多种情况处理
+// 1.一个元素
+// $("button").click(function(){
+//     console.log(123);
+// })
+// 2.多个元素情况
+// $("button").click(function(){
+//     console.log(123);
+// })
+// 3.接收原生节点
+// $(document.querySelector('button')).click(()=>{
+//     console.log(123);
+// })
+// 4.函数的处理
+// $(function(){
+//     console.log(123);
+// })
+
+// 三、多个元素 多个事件 ??
+// $("button").on("mouseover mousedown",()=>{
+//     console.log("执行了");
+// })
+// 四、链式操作 链式调用 ，节点回滚。
+// 1.链式
+// $("button").eq(1).eq(0).on("click",function(){
+//     console.log("click");
+// })
+// 2.节点回滚 :记录上次操作的对象
+// $("button").eq(1).eq(0).end().end().on("click",function(){
+//     console.log("点击");
+// })
+// console.log($("button").eq(0).eq(0));
+
+// 五、样式处理(css)---> 立足未来扩展
+// 1样式处理(css)
+// 情况一：获取样式
+// let res = $("div").css("background");
+// console.log(res);
+// 情况二 ：设置样式1
+// $(".box").css("background","blue");
+// 情况三 ：设置样式2
+// $(".box").css({"background":"blue","height":300});
+
+// 2.立足未来扩展 cssNumber cssHooks
+// wh 属性 ： 既改变宽度 也可以改变高度
+// $.cssHooks.wh = {
+//     get(ele){
+//         // console.log(ele);
+//         return getComputedStyle(ele,null)['width'] + "-" + getComputedStyle(ele,null)['height'];
+//     },
+//     set(ele,styleValue){
+//         ele.style['width'] = styleValue;
+//         ele.style['height'] = styleValue;
+//     }
+// }
+// // let res =  $(".box").css("wh")  // get 
+// // console.log(res);
+// $(".box").css("wh","100px");
+// 作业：实现一个aniamte ; 不基于库或者插件
+$("button").click(function(){
+    // slow fast nomal  
+   $("div").animate({width:"300px"},2000,function(){
+       console.log("运动完成");
+   });
+})
+</script>
+</html>
