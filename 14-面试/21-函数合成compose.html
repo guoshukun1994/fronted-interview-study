@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function aFn(a) {
+        return a*2;
+    }
+
+    function bFn(b) {
+        return b+3;
+    }
+
+    // const compose = function(fn1,fn2) {
+    //     return function(arg) {
+    //         return fn1(fn2(arg));
+    //     }
+    // }
+
+    // let myfn = compose(aFn,bFn);
+    // let res = myfn(2);
+    
+    const compose = function(...fns) {
+        return function(arg) {
+            return fns.reverse().reduce((acc,fn) => {
+                return fn(acc);
+            },arg)
+        }
+    }
+</script>
+</html>
